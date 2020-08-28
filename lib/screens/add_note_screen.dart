@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
 import 'package:gnotes/constrain/colors.dart';
+import 'package:gnotes/models/note.dart';
+import 'package:gnotes/providers/note_provider.dart';
+import 'package:provider/provider.dart';
 
 class AddNoteScreen extends StatelessWidget {
-  final TextEditingController tec = TextEditingController();
+  final TextEditingController tec = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
+    final noteData = Provider.of<NoteProvider>(context);
     List<Color> myColors = _getColors();
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +56,20 @@ class AddNoteScreen extends StatelessWidget {
                   'Add Note',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  Note note = Note(
+                    body: tec.value.text,
+                    date: DateTime.now().toString(),
+                    colorName: ColorName.BLUE
+                  );
+                  if(note.body != ''){
+                    // NoteDbHelper dbHelper = NoteDbHelper.instance;
+                    // dbHelper.insertNote(note);
+                    await noteData.addNote(note);
+                    Navigator.pop(context);
+                    // print(tec.value.text);
+                  }
+                },
               ),
             )
           ],
