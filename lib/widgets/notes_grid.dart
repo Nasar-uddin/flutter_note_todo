@@ -33,23 +33,29 @@ class NoteGrid extends StatelessWidget {
                       crossAxisSpacing: 12.0,
                       childAspectRatio: 1.9),
                   itemBuilder: (context, index) {
-                    return Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      decoration: BoxDecoration(
-                          color: noteColors[snapshot.data[index].colorName],
-                          borderRadius: BorderRadius.circular(5.0),
-                          border: Border.all(
-                              color: noteColors[snapshot.data[index].colorName],
-                              width: 0.5)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            snapshot.data[index].body,
-                            style: _paragraph,
-                          )
-                        ],
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamed(context, '/note_details',arguments: snapshot.data[index]);
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                        decoration: BoxDecoration(
+                            color: noteColors[snapshot.data[index].colorName],
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: Border.all(
+                                color:
+                                    noteColors[snapshot.data[index].colorName],
+                                width: 0.5)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              snapshot.data[index].body,
+                              style: _paragraph,
+                            )
+                          ],
+                        ),
                       ),
                     );
                   });

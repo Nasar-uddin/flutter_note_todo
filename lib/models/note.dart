@@ -12,7 +12,7 @@ class Note {
   Note({@required this.body, this.date, this.colorName = 'white'});
 
   Note.fromMap(Map<String,dynamic> map){
-    if(id!=null){
+    if(map[_noteId]!=null){
       id = map[_noteId];
     }
     body = map[_noteBody];

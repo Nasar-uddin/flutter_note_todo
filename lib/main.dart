@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gnotes/providers/note_provider.dart';
 import 'package:gnotes/screens/add_note_screen.dart';
+import 'package:gnotes/screens/note_details_screen.dart';
 import 'package:gnotes/screens/note_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => NoteScreen(),
-          '/addnote': (context) => AddNoteScreen()
+          '/addnote': (context) => AddNoteScreen(),
+          '/note_details': (context) => NoteDetailScreen()
         },
       ),
     );

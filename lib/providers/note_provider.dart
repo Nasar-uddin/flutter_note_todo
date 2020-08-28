@@ -27,4 +27,9 @@ class NoteProvider with ChangeNotifier {
     getNotes();
     notifyListeners();
   }
+  deleteNote(int id) async {
+    await dbHelper.deleteNote(id);
+    getNotes();
+    notifyListeners();
+  }
 }

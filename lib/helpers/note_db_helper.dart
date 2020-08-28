@@ -60,4 +60,9 @@ class NoteDbHelper{
     // print(result);
     return result;
   }
+  deleteNote(int id) async {
+    Database db = await database;
+    var res = await db.delete(_tableName,where: '$_noteId = ?',whereArgs: [id]);
+    print(res);
+  }
 }
