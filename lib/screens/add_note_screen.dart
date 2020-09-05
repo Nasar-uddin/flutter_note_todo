@@ -4,13 +4,17 @@ import 'package:gnotes/models/note.dart';
 import 'package:gnotes/providers/note_provider.dart';
 import 'package:provider/provider.dart';
 
-class AddNoteScreen extends StatelessWidget {
-  final TextEditingController tec = TextEditingController(text: '');
+class AddNoteScreen extends StatefulWidget {
+  @override
+  _AddNoteScreenState createState() => _AddNoteScreenState();
+}
 
+class _AddNoteScreenState extends State<AddNoteScreen> {
+  final TextEditingController tec = TextEditingController(text: '');
+  String selectColorName = ColorName.WHITE;
   @override
   Widget build(BuildContext context) {
     final noteData = Provider.of<NoteProvider>(context);
-    List<Color> myColors = _getColors();
     return Scaffold(
       appBar: AppBar(
         title: Text('Add note'),
@@ -37,13 +41,7 @@ class AddNoteScreen extends StatelessWidget {
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: myColors.map((e) => Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: CircleAvatar(
-                    backgroundColor: e,
-                    radius: 10,
-                  ),
-                )).toList(),
+                children: _colorSelection(),
               ),
             ),
             Container(
@@ -58,11 +56,10 @@ class AddNoteScreen extends StatelessWidget {
                 ),
                 onPressed: () async {
                   Note note = Note(
-                    body: tec.value.text,
-                    date: DateTime.now().toString(),
-                    colorName: ColorName.BLUE
-                  );
-                  if(note.body != ''){
+                      body: tec.value.text.trim(),
+                      date: DateTime.now().toString(),
+                      colorName: selectColorName);
+                  if (note.body != '') {
                     // NoteDbHelper dbHelper = NoteDbHelper.instance;
                     // dbHelper.insertNote(note);
                     await noteData.addNote(note);
@@ -78,12 +75,43 @@ class AddNoteScreen extends StatelessWidget {
     );
   }
 
-  List<Color> _getColors() {
-    List<Color> nColors = [];
-    noteColors.forEach((key, value) { 
-      nColors.add(value);
+
+  List<Widget> _colorSelection() {
+    List<Widget> widgets = [];
+    noteColors.forEach((key, value) {
+      widgets.add(GestureDetector(
+        onTap: (){
+          setState(() {
+            selectColorName = key;
+          });
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+          height: selectColorName==key? 20:15,
+          width: selectColorName==key? 20:15,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: value,
+            boxShadow: [BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              blurRadius: 10,
+              offset: Offset(5, 5)
+            )]
+          ),
+        ),
+      ));
     });
-    // print(nColors);
-    return nColors;
+    return widgets;
   }
 }
+/*
+myColors.map((e) {
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: CircleAvatar(
+      backgroundColor: e,
+      radius: 10,
+    ),
+  );
+}).toList()
+*/

@@ -32,4 +32,9 @@ class NoteProvider with ChangeNotifier {
     getNotes();
     notifyListeners();
   }
+  updateNote(Note note) async {
+    await dbHelper.updateNote(note);
+    getNotes();
+    notifyListeners();
+  }
 }

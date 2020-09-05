@@ -5,14 +5,24 @@ import 'package:gnotes/providers/note_provider.dart';
 import 'package:provider/provider.dart';
 
 
-class NoteDetailScreen extends StatelessWidget {
+class NoteDetailScreen extends StatefulWidget {
+  @override
+  _NoteDetailScreenState createState() => _NoteDetailScreenState();
+}
+
+class _NoteDetailScreenState extends State<NoteDetailScreen> {
+  String selectColorName = ColorName.WHITE;
+  bool buildOnce = false;
   @override
   Widget build(BuildContext context) {
     final noteData = Provider.of<NoteProvider>(context);
     Note note = ModalRoute.of(context).settings.arguments;
-    // print(note.toMap());
     final TextEditingController tec = TextEditingController(text: note.body);
-    List<Color> myColors = _getColors();
+    if(!buildOnce){
+      selectColorName = note.colorName;
+      buildOnce = true;
+    }
+    // print(note.toMap());
     return Scaffold(
       appBar: AppBar(
         title: Text('Note Details'),
@@ -49,13 +59,7 @@ class NoteDetailScreen extends StatelessWidget {
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: myColors.map((e) => Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: CircleAvatar(
-                    backgroundColor: e,
-                    radius: 10,
-                  ),
-                )).toList(),
+                children: _colorSelection(),
               ),
             ),
             Container(
@@ -69,7 +73,11 @@ class NoteDetailScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  
+                  // print(tec.)
+                  note.body = tec.value.text.trim();
+                  note.colorName = selectColorName;
+                  await noteData.updateNote(note);
+                  Navigator.pop(context);
                 },
               ),
             )
@@ -79,12 +87,31 @@ class NoteDetailScreen extends StatelessWidget {
     );
   }
 
-  List<Color> _getColors() {
-    List<Color> nColors = [];
-    noteColors.forEach((key, value) { 
-      nColors.add(value);
+  List<Widget> _colorSelection() {
+    List<Widget> widgets = [];
+    noteColors.forEach((key, value) {
+      widgets.add(GestureDetector(
+        onTap: (){
+          setState(() {
+            selectColorName = key;
+          });
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+          height: selectColorName==key? 20:15,
+          width: selectColorName==key? 20:15,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: value,
+            boxShadow: [BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              blurRadius: 10,
+              offset: Offset(5, 5)
+            )]
+          ),
+        ),
+      ));
     });
-    // print(nColors);
-    return nColors;
+    return widgets;
   }
 }

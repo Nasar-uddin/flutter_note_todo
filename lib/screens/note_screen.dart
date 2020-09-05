@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gnotes/widgets/notes_grid.dart';
+import 'package:gnotes/widgets/notes_list.dart';
 
 class NoteScreen extends StatelessWidget {
   @override
@@ -15,6 +15,6 @@ class NoteScreen extends StatelessWidget {
             Navigator.pushNamed(context, '/addnote');
           },
         ),
-        body: NoteGrid());
+        body: NotesList());
   }
 }

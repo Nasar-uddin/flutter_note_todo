@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gnotes/constrain/colors.dart';
-import 'package:gnotes/models/note.dart';
 import 'package:gnotes/providers/note_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +50,7 @@ class NoteGrid extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              snapshot.data[index].body,
+                              snapshot.data[index].body.toString().length>50?snapshot.data[index].body.toString().substring(0,49):snapshot.data[index].body,
                               style: _paragraph,
                             )
                           ],

@@ -65,4 +65,15 @@ class NoteDbHelper{
     var res = await db.delete(_tableName,where: '$_noteId = ?',whereArgs: [id]);
     print(res);
   }
+  updateNote(Note note) async {
+     Database db = await database;
+     Map<String,dynamic> map = {
+       _noteBody: note.body,
+       _color: note.colorName
+     };
+    //  print(map);
+     var res =await db.update(_tableName, map,where: '$_noteId = ?',whereArgs: [note.id]);
+    //  print(res);
+     return res;
+  }
 }

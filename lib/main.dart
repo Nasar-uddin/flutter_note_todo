@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
-          accentColor: Colors.orange,
+          accentColor: Colors.orange[800],
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: '/',
