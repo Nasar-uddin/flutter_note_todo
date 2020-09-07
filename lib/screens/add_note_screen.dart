@@ -18,6 +18,24 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add note'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.check_circle_outline),
+            onPressed: () async {
+              Note note = Note(
+                  body: tec.value.text.trim(),
+                  date: DateTime.now().toString(),
+                  colorName: selectColorName);
+              if (note.body != '') {
+                // NoteDbHelper dbHelper = NoteDbHelper.instance;
+                // dbHelper.insertNote(note);
+                await noteData.addNote(note);
+                Navigator.pop(context);
+                // print(tec.value.text);
+              }
+            },
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
@@ -44,60 +62,34 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 children: _colorSelection(),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              height: 46,
-              width: double.infinity,
-              child: FlatButton(
-                color: Theme.of(context).accentColor,
-                child: Text(
-                  'Add Note',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  Note note = Note(
-                      body: tec.value.text.trim(),
-                      date: DateTime.now().toString(),
-                      colorName: selectColorName);
-                  if (note.body != '') {
-                    // NoteDbHelper dbHelper = NoteDbHelper.instance;
-                    // dbHelper.insertNote(note);
-                    await noteData.addNote(note);
-                    Navigator.pop(context);
-                    // print(tec.value.text);
-                  }
-                },
-              ),
-            )
           ],
         ),
       ),
     );
   }
 
-
   List<Widget> _colorSelection() {
     List<Widget> widgets = [];
     noteColors.forEach((key, value) {
       widgets.add(GestureDetector(
-        onTap: (){
+        onTap: () {
           setState(() {
             selectColorName = key;
           });
         },
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
-          height: selectColorName==key? 20:15,
-          width: selectColorName==key? 20:15,
+          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+          height: selectColorName == key ? 20 : 15,
+          width: selectColorName == key ? 20 : 15,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: value,
-            boxShadow: [BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.05),
-              blurRadius: 10,
-              offset: Offset(5, 5)
-            )]
-          ),
+              borderRadius: BorderRadius.circular(10.0),
+              color: value,
+              boxShadow: [
+                BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.05),
+                    blurRadius: 10,
+                    offset: Offset(5, 5))
+              ]),
         ),
       ));
     });

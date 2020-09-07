@@ -13,6 +13,7 @@ class NotesList extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: FutureBuilder(
         future: noteData.getNotes(),
+        // ignore: missing_return
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -33,7 +34,7 @@ class NotesList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Container(
                         padding: EdgeInsets.symmetric(vertical: 6),
-                        margin: EdgeInsets.only(bottom: 12.0),
+                        margin: EdgeInsets.only(bottom: 20.0),
                         decoration: BoxDecoration(
                           color: noteColors[snapshot.data[index].colorName],
                           borderRadius: BorderRadius.circular(5.0),

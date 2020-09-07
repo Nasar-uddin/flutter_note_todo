@@ -15,6 +15,8 @@ class NoteScreen extends StatelessWidget {
             Navigator.pushNamed(context, '/addnote');
           },
         ),
-        body: NotesList());
+        body: Container(
+          child: NotesList(),
+        ));
   }
 }
