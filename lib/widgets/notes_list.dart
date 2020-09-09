@@ -33,28 +33,31 @@ class NotesList extends StatelessWidget {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: EdgeInsets.symmetric(vertical: 6),
+                        // padding: EdgeInsets.symmetric(vertical: 10),
                         margin: EdgeInsets.only(bottom: 20.0),
                         decoration: BoxDecoration(
-                          color: noteColors[snapshot.data[index].colorName],
+                          color: noteColors2[snapshot.data[index].colorName]['bgc'],
                           borderRadius: BorderRadius.circular(5.0),
                           boxShadow: [BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.05),
+                            color: Color.fromRGBO(0, 0, 0, 0.10),
                             blurRadius: 15,
-                            offset: Offset(0, 6.0)
+                            offset: Offset(0, 4.0)
                           )]
                         ),
                         child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 16),
                           title: Text(
                             snapshot.data[index].body,
-                            style: _paragraph,
+                            style: _paragraph.copyWith(
+                              color: noteColors2[snapshot.data[index].colorName]['tpc']
+                            ),
                           ),
                           subtitle: Padding(
                             padding: const EdgeInsets.only(top:10),
                             child: Text(
-                              snapshot.data[index].date.toString().substring(0,10),
+                              '${snapshot.data[index].date}  ${snapshot.data[index].time}',
                               style: TextStyle(
-                                color: Colors.black45
+                                color: noteColors2[snapshot.data[index].colorName]['tsc']
                               ),
                             ),
                           ),

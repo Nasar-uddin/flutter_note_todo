@@ -79,6 +79,30 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
 
   List<Widget> _colorSelection() {
     List<Widget> widgets = [];
+    noteColors2.forEach((key, value) {
+      widgets.add(GestureDetector(
+        onTap: (){
+          setState(() {
+            selectColorName = key;
+          });
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+          height: selectColorName == key ? 20 : 15,
+          width: selectColorName == key ? 20 : 15,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: value['bgc'],
+              boxShadow: [
+                BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.05),
+                    blurRadius: 10,
+                    offset: Offset(5, 5))
+              ])
+        ),
+      ));
+    });
+    /*
     noteColors.forEach((key, value) {
       widgets.add(GestureDetector(
         onTap: () {
@@ -102,6 +126,8 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
         ),
       ));
     });
+
+    */
     return widgets;
   }
 }

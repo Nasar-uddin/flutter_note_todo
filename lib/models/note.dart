@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-
+import 'package:intl/intl.dart';
 class Note {
   final String _noteId = 'note_id';
   final String _noteBody = 'note_body';
@@ -9,6 +9,7 @@ class Note {
   String body;
   String colorName;
   String date;
+  String time;
   Note({@required this.body, this.date, this.colorName = 'white'});
 
   Note.fromMap(Map<String,dynamic> map){
@@ -16,8 +17,11 @@ class Note {
       id = map[_noteId];
     }
     body = map[_noteBody];
-    date = map[_date];
+    // date = map[_date];
     colorName = map[_color];
+    DateTime dt =  DateTime.parse(map[_date]);
+    time = DateFormat.jm().format(dt);
+    date = DateFormat.yMMMd().format(dt);
   }
 
   Map<String, dynamic> toMap() {

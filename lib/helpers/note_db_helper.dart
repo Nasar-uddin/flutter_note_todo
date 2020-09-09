@@ -56,7 +56,7 @@ class NoteDbHelper{
   }
   getNoteList() async {
     Database db = await database;
-    var result = await db.query(_tableName);
+    var result = await db.query(_tableName,orderBy: '-$_noteId');
     // print(result);
     return result;
   }

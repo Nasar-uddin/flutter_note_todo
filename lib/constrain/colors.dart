@@ -10,6 +10,8 @@ class ColorName{
     static final String ORANGE = 'orange';
     // ignore: non_constant_identifier_names
     static final String BLUE = 'blue';
+    // ignore: non_constant_identifier_names
+    static final String TEAL = 'teal';
 }
 Map<String,Color> noteColors = {
     ColorName.WHITE: Colors.white,
@@ -17,4 +19,36 @@ Map<String,Color> noteColors = {
     ColorName.BLUE: Colors.blue[100],
     ColorName.ORANGE: Colors.orange[100],
     ColorName.RED:Colors.red[100],
+};
+Map<String,Map<String,Color>> noteColors2 = {
+    ColorName.WHITE: {
+      'bgc': Colors.white,
+      'tpc': Colors.black87,
+      'tsc': Colors.black45
+    },
+    ColorName.GERY: {
+      'bgc': Colors.black54,
+      'tpc': Colors.white,
+      'tsc': Colors.white54
+    },
+    ColorName.BLUE: {
+      'bgc': Colors.blue,
+      'tpc': Colors.white,
+      'tsc': Colors.white70
+    },
+    ColorName.ORANGE: {
+      'bgc': Colors.orange[800],
+      'tpc': Colors.white,
+      'tsc': Colors.white54
+    },
+    ColorName.RED: {
+      'bgc': Colors.red[300],
+      'tpc': Colors.white,
+      'tsc': Colors.white70
+    },
+    ColorName.TEAL: {
+      'bgc': Colors.teal,
+      'tpc': Colors.white,
+      'tsc': Colors.white70
+    },
 };
