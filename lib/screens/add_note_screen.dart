@@ -5,11 +5,13 @@ import 'package:gnotes/providers/note_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddNoteScreen extends StatefulWidget {
+  static final String routeName = '/addnote';
   @override
   _AddNoteScreenState createState() => _AddNoteScreenState();
 }
 
 class _AddNoteScreenState extends State<AddNoteScreen> {
+  
   final TextEditingController tec = TextEditingController(text: '');
   String selectColorName = ColorName.WHITE;
   @override
@@ -93,42 +95,6 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
         ),
       ));
     });
-    /*
-    noteColors.forEach((key, value) {
-      widgets.add(GestureDetector(
-        onTap: () {
-          setState(() {
-            selectColorName = key;
-          });
-        },
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-          height: selectColorName == key ? 20 : 15,
-          width: selectColorName == key ? 20 : 15,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: value,
-              boxShadow: [
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.05),
-                    blurRadius: 10,
-                    offset: Offset(5, 5))
-              ]),
-        ),
-      ));
-    });
-    */
     return widgets;
   }
 }
-/*
-myColors.map((e) {
-  return Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: CircleAvatar(
-      backgroundColor: e,
-      radius: 10,
-    ),
-  );
-}).toList()
-*/

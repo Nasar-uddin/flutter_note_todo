@@ -5,6 +5,7 @@ import 'package:gnotes/providers/note_provider.dart';
 import 'package:provider/provider.dart';
 
 class NoteDetailScreen extends StatefulWidget {
+  static final String routeName = '/note_details';
   @override
   _NoteDetailScreenState createState() => _NoteDetailScreenState();
 }

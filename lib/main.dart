@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gnotes/providers/note_provider.dart';
+import 'package:gnotes/providers/todo_provider.dart';
 import 'package:gnotes/screens/add_note_screen.dart';
 import 'package:gnotes/screens/note_details_screen.dart';
 import 'package:gnotes/screens/note_screen.dart';
+import 'package:gnotes/screens/test_tab.dart';
+import 'package:gnotes/screens/todo_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,8 +18,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context)=>NoteProvider(),
+          create: (context)=> NoteProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => TodoProvider()
+        )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -27,9 +33,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => NoteScreen(),
-          '/addnote': (context) => AddNoteScreen(),
-          '/note_details': (context) => NoteDetailScreen()
+          NoteScreen.routeName: (context) => NoteScreen(),
+          AddNoteScreen.routeName: (context) => AddNoteScreen(),
+          NoteDetailScreen.routeName: (context) => NoteDetailScreen(),
+          TodoScreen.routeName: (context) => TodoScreen(),
+          TestTab.routeName: (context) => TestTab()
         },
       ),
     );

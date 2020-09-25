@@ -6,13 +6,13 @@ class NoteProvider with ChangeNotifier {
   List<Note> _notes;
   bool noteLoaded = false;
   NoteDbHelper dbHelper = NoteDbHelper.instance;
-  NoteProvider() {
-    getNotes();
-  }
+  // NoteProvider() {
+  //   getNotes();
+  // }
   getNotes() async {
     List<Note> notes = [];
     List<Map<String, dynamic>> dbnotes = await dbHelper.getNoteList();
-    // notes = dbnotes;
+    // print(dbnotes);
     dbnotes.forEach((nt) {
       notes.add(Note.fromMap(nt));
     });

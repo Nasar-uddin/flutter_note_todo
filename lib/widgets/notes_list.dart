@@ -10,7 +10,7 @@ class NotesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final noteData = Provider.of<NoteProvider>(context);
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: FutureBuilder(
         future: noteData.getNotes(),
         // ignore: missing_return
@@ -34,7 +34,7 @@ class NotesList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Container(
                         // padding: EdgeInsets.symmetric(vertical: 10),
-                        margin: EdgeInsets.only(bottom: 20.0),
+                        margin: EdgeInsets.symmetric(vertical:10),
                         decoration: BoxDecoration(
                           color: noteColors2[snapshot.data[index].colorName]['bgc'],
                           borderRadius: BorderRadius.circular(5.0),

@@ -16,6 +16,12 @@ class NoteDbHelper{
   final String _date = 'create_date';
   final String _color = 'note_color';
 
+  // todo column names
+  final String _idName = 'id';
+  final String _todoName = 'todo';
+  final String _isDoneName = 'isDone';
+  final String _addedOnName = 'addedOn';
+
   Database _database;
   NoteDbHelper._privateConstructor();
   static NoteDbHelper instance = NoteDbHelper._privateConstructor();
@@ -45,6 +51,14 @@ class NoteDbHelper{
         $_noteBody TEXT NOT NULL,
         $_date TEXT NOT NULL,
         $_color TEXT
+      )
+      ''');
+    db.execute('''
+      CREATE TABLE todo_table(
+        $_idName INTEGER PRIMARY KEY AUTOINCREMENT,
+        $_todoName TEXT NOT NULL,
+        $_addedOnName TEXT NOT NULL,
+        $_isDoneName Bool
       )
       ''');
   }

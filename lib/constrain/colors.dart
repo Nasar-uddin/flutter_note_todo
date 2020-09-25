@@ -47,7 +47,7 @@ Map<String,Map<String,Color>> noteColors2 = {
       'tsc': Colors.white70
     },
     ColorName.TEAL: {
-      'bgc': Colors.teal,
+      'bgc': Colors.green[400],
       'tpc': Colors.white,
       'tsc': Colors.white70
     },
