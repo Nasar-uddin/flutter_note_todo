@@ -36,8 +36,9 @@ class TodoProvider with ChangeNotifier{
     // getTodos();
     notifyListeners();
   }
-  toggleTodoDone(Todo todo){
-    // todoDbHelper.toggleIsDone(todo);
-    // notifyListeners();
+  deleteTodo(Todo todo){
+    todoDbHelper.deleteTodo(todo);
+    notifyListeners();
   }
+
 }

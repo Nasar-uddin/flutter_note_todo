@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gnotes/models/todo.dart';
+import 'package:gnotes/providers/todo_provider.dart';
 import 'package:gnotes/widgets/todo_modal.dart';
 import 'package:provider/provider.dart';
 
 class SingleTodoItem extends StatelessWidget {
-  // const SingleTodoItem({this.todo});
-  // final Todo todo;
   @override
   Widget build(BuildContext context) {
     final todo = Provider.of<Todo>(context);
+    final todoProvider = Provider.of<TodoProvider>(context);
     return GestureDetector(
       onLongPress: () {
         showModalBottomSheet(
@@ -35,7 +35,10 @@ class SingleTodoItem extends StatelessWidget {
               size: 20,
               color: Colors.red[300],
             ),
-            onPressed: () {},
+            onPressed: () {
+              // TODO: add delete functionality
+              todoProvider.deleteTodo(todo);
+            },
           )
         ],
       ),

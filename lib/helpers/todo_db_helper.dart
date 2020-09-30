@@ -67,4 +67,9 @@ class TodoDbHelper{
     int result = await db.update(_tableName, map, where: '$_idName = ?', whereArgs: [todo.id]);
     return result;
   }
+  deleteTodo(Todo todo) async {
+    Database db = await database;
+    int result = await db.delete(_tableName, where: '$_idName=?', whereArgs: [todo.id]);
+    return result;
+  }
 }
