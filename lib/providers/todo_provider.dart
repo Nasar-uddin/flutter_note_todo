@@ -6,16 +6,17 @@ class TodoProvider with ChangeNotifier{
   List<Todo> _todos = [];
   bool todoLoaded = false;
   TodoDbHelper todoDbHelper = TodoDbHelper.instance;
-  get todos async {
+  Future<List<Todo>> get todos async {
     _todos = [];
     List<Map<String, dynamic>> todolist = await todoDbHelper.fetchTodo();
     // print(todolist);
     todolist.forEach((map) { 
       _todos.add(Todo.fromMap(map));
     });
-    return _todos;
+    todoLoaded = true;
+    return [..._todos];
   }
-  getTodos() async {
+  Future<List<Todo>> getTodos() async {
     _todos = [];
     List<Map<String, dynamic>> todolist = await todoDbHelper.fetchTodo();
     // print(todolist);
@@ -27,7 +28,16 @@ class TodoProvider with ChangeNotifier{
   }
   insertTodo(Todo todo){
     todoDbHelper.insertTodo(todo);
-    getTodos();
+    // getTodos();
     notifyListeners();
+  }
+  updateTodo(Todo todo){
+    todoDbHelper.updateTodo(todo);
+    // getTodos();
+    notifyListeners();
+  }
+  toggleTodoDone(Todo todo){
+    // todoDbHelper.toggleIsDone(todo);
+    // notifyListeners();
   }
 }

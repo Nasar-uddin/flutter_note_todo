@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gnotes/models/todo.dart';
 import 'package:gnotes/providers/todo_provider.dart';
+import 'package:gnotes/widgets/single_todo_item.dart';
 import 'package:provider/provider.dart';
 
 class TodoList extends StatelessWidget {
@@ -8,10 +11,10 @@ class TodoList extends StatelessWidget {
     final todoData = Provider.of<TodoProvider>(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      child: FutureBuilder(
+      child: FutureBuilder<List<Todo>>(
         future: todoData.todos,
         // ignore: missing_return
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<Todo>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Center(child: CircularProgressIndicator());
@@ -21,36 +24,9 @@ class TodoList extends StatelessWidget {
                   return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onLongPress: (){
-                          showModalBottomSheet(context: context, builder: (context){
-                            return Container(
-                              child: Column(
-                                children: [
-                                  Text(snapshot.data[index].todo),
-                                ],
-                              ),
-                            );
-                          });
-                        },
-                        child: Row(
-                          children: [
-                            Checkbox(
-                                value: snapshot.data[index].isDone,
-                                onChanged: (value) {
-                                  // print(value);
-                                }),
-                            Expanded(child: Text(snapshot.data[index].todo)),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                size: 20,
-                                color: Colors.red[300],
-                              ),
-                              onPressed: () {},
-                            )
-                          ],
-                        ),
+                      return ChangeNotifierProvider.value(
+                        value: snapshot.data[index],
+                        child: SingleTodoItem(),
                       );
                     },
                   );

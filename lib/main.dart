@@ -5,7 +5,6 @@ import 'package:gnotes/screens/add_note_screen.dart';
 import 'package:gnotes/screens/note_details_screen.dart';
 import 'package:gnotes/screens/note_screen.dart';
 import 'package:gnotes/screens/test_tab.dart';
-import 'package:gnotes/screens/todo_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -36,7 +35,6 @@ class MyApp extends StatelessWidget {
           NoteScreen.routeName: (context) => NoteScreen(),
           AddNoteScreen.routeName: (context) => AddNoteScreen(),
           NoteDetailScreen.routeName: (context) => NoteDetailScreen(),
-          TodoScreen.routeName: (context) => TodoScreen(),
           TestTab.routeName: (context) => TestTab()
         },
       ),

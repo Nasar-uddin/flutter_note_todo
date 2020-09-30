@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:gnotes/helpers/todo_db_helper.dart';
 
-class Todo{
+class Todo with ChangeNotifier{
   int id;
   String addedOn;
   String todo;
@@ -10,6 +11,7 @@ class Todo{
   final String todoName = 'todo';
   final String isDoneName = 'isDone';
   final String addedOnName = 'addedOn';
+  final TodoDbHelper todoDbHelper = TodoDbHelper.instance;
 
   Todo({
     @required this.todo,
@@ -33,5 +35,14 @@ class Todo{
       isDoneName: isDone,
       addedOnName: addedOn
     };
+  }
+  toggleIsDone() async {
+    int result = await todoDbHelper.toggleIsDone(this);
+    if(result==1){
+      isDone = !isDone;
+      notifyListeners();
+    }else{
+      print('Error togging todo');
+    }
   }
 }

@@ -11,9 +11,9 @@ class TodoDbHelper{
   final String _tableName = 'todo_table';
 
   // column names
-  // final String _idName = 'id';
-  // final String _todoName = 'todo';
-  // final String _isDoneName = 'isDone';
+  final String _idName = 'id';
+  final String _todoName = 'todo';
+  final String _isDoneName = 'isDone';
   // final String _addedOnName = 'addedOn';
   
   Database _database;
@@ -47,6 +47,22 @@ class TodoDbHelper{
     Database db = await database;
     var result = await db.query(_tableName);
     // print(result);
+    return result;
+  }
+  updateTodo(Todo todo) async {
+    Database db = await database;
+    Map<String,dynamic> map = {
+      _todoName: todo.todo
+    };
+    var result = await db.update(_tableName, map, where: '$_idName = ?', whereArgs: [todo.id]);
+    return result;
+  }
+  toggleIsDone(Todo todo) async {
+    Database db = await database;
+    Map<String,dynamic> map = {
+      _isDoneName: todo.isDone?0:1
+    };
+    int result = await db.update(_tableName, map, where: '$_idName = ?', whereArgs: [todo.id]);
     return result;
   }
 }
