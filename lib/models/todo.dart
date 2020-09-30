@@ -11,7 +11,7 @@ class Todo with ChangeNotifier{
   final String todoName = 'todo';
   final String isDoneName = 'isDone';
   final String addedOnName = 'addedOn';
-  final TodoDbHelper todoDbHelper = TodoDbHelper.instance;
+  
 
   Todo({
     @required this.todo,
@@ -37,6 +37,7 @@ class Todo with ChangeNotifier{
     };
   }
   toggleIsDone() async {
+    final TodoDbHelper todoDbHelper = TodoDbHelper.instance;
     int result = await todoDbHelper.toggleIsDone(this);
     if(result==1){
       isDone = !isDone;
@@ -44,5 +45,11 @@ class Todo with ChangeNotifier{
     }else{
       print('Error togging todo');
     }
+  }
+  updateTodo() async{
+    final TodoDbHelper todoDbHelper = TodoDbHelper.instance;
+    int result = await todoDbHelper.updateTodo(this);
+    notifyListeners();
+    return result;
   }
 }

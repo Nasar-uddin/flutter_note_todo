@@ -4,11 +4,9 @@ import 'package:gnotes/providers/todo_provider.dart';
 import 'package:provider/provider.dart';
 
 class TodoModal extends StatelessWidget {
-  
-  TodoModal({this.todo});
+  TodoModal({this.todo, this.forUpdate=true});
   final Todo todo;
-  
-
+  final bool forUpdate;
   @override
   Widget build(BuildContext context) {
     final todoData = Provider.of<TodoProvider>(context);
@@ -29,11 +27,16 @@ class TodoModal extends StatelessWidget {
               controller: tec,
               autofocus: true,
               onSubmitted: (value){
-                print(value);
                 todo.todo = value;
                 // print(todo.toMap());
-                todoData.updateTodo(todo);
-                Navigator.pop(context);
+                if(forUpdate){
+                  todoData.updateTodo(todo);
+                  Navigator.pop(context);
+                }else{
+                  todo.addedOn = DateTime.now().toString();
+                  todoData.insertTodo(todo);
+                  Navigator.pop(context);
+                }
               },
               decoration: InputDecoration(
                 border: InputBorder.none,

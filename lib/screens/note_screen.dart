@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gnotes/models/todo.dart';
 import 'package:gnotes/screens/add_note_screen.dart';
 import 'package:gnotes/widgets/notes_list.dart';
 import 'package:gnotes/widgets/todo_list.dart';
+import 'package:gnotes/widgets/todo_modal.dart';
 
 class NoteScreen extends StatelessWidget {
   static final routeName = '/';
@@ -41,7 +43,13 @@ class NoteScreen extends StatelessWidget {
                   Navigator.pushNamed(context, AddNoteScreen.routeName);
                   break;
                 case 1:
-                  print('Todo note');
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context){
+                      return TodoModal(todo: Todo(todo: '', isDone: false),forUpdate: false);
+                    }
+                  );
                   break;
               }
             },

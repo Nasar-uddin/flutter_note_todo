@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gnotes/models/todo.dart';
-import 'package:gnotes/widgets/todoModal.dart';
+import 'package:gnotes/widgets/todo_modal.dart';
 import 'package:provider/provider.dart';
 
 class SingleTodoItem extends StatelessWidget {

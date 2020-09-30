@@ -39,7 +39,9 @@ class TodoDbHelper{
   }
   insertTodo(Todo todo) async {
     Database db = await database;
-    var result = await db.insert(_tableName, todo.toMap());
+    Map<String,dynamic> map = todo.toMap();
+    map[_isDoneName] = 0;
+    var result = await db.insert(_tableName, map);
     print(result);
     return result;
   }
