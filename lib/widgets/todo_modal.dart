@@ -27,14 +27,18 @@ class TodoModal extends StatelessWidget {
               controller: tec,
               autofocus: true,
               onSubmitted: (value){
-                todo.todo = value;
-                // print(todo.toMap());
-                if(forUpdate){
-                  todoData.updateTodo(todo);
-                  Navigator.pop(context);
+                if(value!=""){
+                  todo.todo = value;
+                  // print(todo.toMap());
+                  if(forUpdate){
+                    todoData.updateTodo(todo);
+                    Navigator.pop(context);
+                  }else{
+                    todo.addedOn = DateTime.now().toString();
+                    todoData.insertTodo(todo);
+                    Navigator.pop(context);
+                  }
                 }else{
-                  todo.addedOn = DateTime.now().toString();
-                  todoData.insertTodo(todo);
                   Navigator.pop(context);
                 }
               },

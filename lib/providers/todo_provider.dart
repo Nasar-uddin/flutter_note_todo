@@ -7,6 +7,9 @@ class TodoProvider with ChangeNotifier{
   bool todoLoaded = false;
   TodoDbHelper todoDbHelper = TodoDbHelper.instance;
   Future<List<Todo>> get todos async {
+    // if(_todos.length>0){
+    //   return _todos;
+    // }
     _todos = [];
     List<Map<String, dynamic>> todolist = await todoDbHelper.fetchTodo();
     // print(todolist);

@@ -10,7 +10,7 @@ class SingleTodoItem extends StatelessWidget {
     final todo = Provider.of<Todo>(context);
     final todoProvider = Provider.of<TodoProvider>(context);
     return GestureDetector(
-      onLongPress: () {
+      onTap: () {
         showModalBottomSheet(
           context: context,
           isScrollControlled: true,
@@ -36,7 +36,6 @@ class SingleTodoItem extends StatelessWidget {
               color: Colors.red[300],
             ),
             onPressed: () {
-              // TODO: add delete functionality
               todoProvider.deleteTodo(todo);
             },
           )

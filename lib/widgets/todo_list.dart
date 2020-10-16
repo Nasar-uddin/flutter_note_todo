@@ -15,13 +15,11 @@ class TodoList extends StatelessWidget {
         future: todoData.todos,
         // ignore: missing_return
         builder: (BuildContext context, AsyncSnapshot<List<Todo>> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            case ConnectionState.done:
-              if (snapshot.hasData) {
-                if (snapshot.data.length > 0) {
-                  return ListView.builder(
+          if(snapshot.hasData){
+            if(snapshot.data.length==0){
+              return Center(child: Text('No todo'));
+            }else{
+              return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       return ChangeNotifierProvider.value(
@@ -30,13 +28,9 @@ class TodoList extends StatelessWidget {
                       );
                     },
                   );
-                }
-              } else {
-                return Text('No todos');
-              }
-              break;
-            default:
-              return Text('Waiting');
+            }
+          }else{
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),
