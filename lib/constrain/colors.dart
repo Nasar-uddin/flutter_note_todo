@@ -12,6 +12,8 @@ class ColorName{
     static final String BLUE = 'blue';
     // ignore: non_constant_identifier_names
     static final String TEAL = 'teal';
+    // ignore: non_constant_identifier_names
+    static final String YELLOW = 'yellow';
 }
 Map<String,Color> noteColors = {
     ColorName.WHITE: Colors.white,
@@ -51,4 +53,9 @@ Map<String,Map<String,Color>> noteColors2 = {
       'tpc': Colors.white,
       'tsc': Colors.white70
     },
+    ColorName.YELLOW: {
+      'bgc': Colors.yellow,
+      'tpc': Colors.black87,
+      'tsc': Colors.black38
+    }
 };

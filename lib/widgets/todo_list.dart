@@ -6,6 +6,7 @@ import 'package:gnotes/widgets/single_todo_item.dart';
 import 'package:provider/provider.dart';
 
 class TodoList extends StatelessWidget {
+  const TodoList({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final todoData = Provider.of<TodoProvider>(context);

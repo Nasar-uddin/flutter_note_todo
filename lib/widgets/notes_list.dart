@@ -4,10 +4,10 @@ import 'package:gnotes/providers/note_provider.dart';
 import 'package:provider/provider.dart';
 
 class NotesList extends StatelessWidget {
-  final TextStyle _paragraph = TextStyle(fontSize: 16, color: Colors.black87);
-
+  const NotesList({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final TextStyle _paragraph = TextStyle(fontSize: 16, color: Colors.black87);
     final noteData = Provider.of<NoteProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -15,15 +15,7 @@ class NotesList extends StatelessWidget {
         future: noteData.getNotes(),
         // ignore: missing_return
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            case ConnectionState.done:
-              if (snapshot.hasData) {
+          if (snapshot.hasData) {
                 if(snapshot.data.length==0) return Container(
                   alignment: Alignment.center,
                   child: Text('No Notes available'),
@@ -68,13 +60,11 @@ class NotesList extends StatelessWidget {
                         ),
                       );
                     });
+              }else{
+                return Container(
+                  child: Text(''),
+                );
               }
-              break;
-            default:
-              return Container(
-                child: Text('No notes'),
-              );
-          }
         },
       ),
     );

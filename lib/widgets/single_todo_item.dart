@@ -28,7 +28,14 @@ class SingleTodoItem extends StatelessWidget {
                 // print(value);
                 // todoData.toggleTodoDone(todo);
               }),
-          Expanded(child: Text(todo.todo)),
+          Expanded(
+            child: Text(
+              todo.todo,
+              style: TextStyle(
+                decoration: todo.isDone?TextDecoration.lineThrough:TextDecoration.none
+              ),
+            )
+          ),
           IconButton(
             icon: Icon(
               Icons.delete,
